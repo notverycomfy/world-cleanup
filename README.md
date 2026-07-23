@@ -1,58 +1,46 @@
 <div align="center">
 
-<img src="world-cleanup-icon.png" alt="World Cleanup icon" width="128">
+<img src="world-cleanup-icon.png" alt="World Cleanup grass block logo" width="160">
 
 # World Cleanup
 
-**Intelligent dropped-item cleanup that reduces lag without punishing players.**
+### Keep dropped items fair without keeping them forever.
 
-[![CurseForge](https://img.shields.io/badge/Download-CurseForge-F16436?logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/mc-mods/world-cleanup)
-[![Modrinth](https://img.shields.io/badge/Download-Modrinth-00AF5C?logo=modrinth&logoColor=white)](https://modrinth.com/mod/world-cleanup)
-![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2%20%7C%2026.2-62B47A)
-![Loaders](https://img.shields.io/badge/Loaders-Fabric%20%7C%20NeoForge-5C6BC0)
-![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)
+Intelligent, configurable dropped-item cleanup that reduces lag without punishing players.
+
+[Download on Modrinth](https://modrinth.com/mod/world-cleanup) · [Download on CurseForge](https://www.curseforge.com/minecraft/mc-mods/world-cleanup) · [Report an issue](https://github.com/notverycomfy/world-cleanup/issues)
+
+![Minecraft 26.1.2 and 26.2](https://img.shields.io/badge/Minecraft-26.1.2%20%7C%2026.2-62B47A)
+![NeoForge and Fabric](https://img.shields.io/badge/Loaders-NeoForge%20%7C%20Fabric-E46A2C)
+![All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-9B59B6)
 
 </div>
 
-> Official downloads are available only from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/world-cleanup) and [Modrinth](https://modrinth.com/mod/world-cleanup). GitHub contains source code and documentation; release jars are not distributed here.
+> Official JAR downloads are distributed through Modrinth and CurseForge. GitHub contains source code only.
 
-## What it does
+## Highlights
 
-World Cleanup replaces Minecraft's universal dropped-item timer with configurable rules that understand item value and context:
+- Valuable items stay longer while common blocks disappear sooner
+- Player-thrown items and mob drops use separate timers
+- Items near a recent player death receive temporary protection
+- Dense farms can clean eligible drops more aggressively
+- Timers, detection settings, and item categories are configurable in game
 
-- Valuable items remain longer while common blocks disappear sooner.
-- Player-thrown items and mob drops use separate timers.
-- Items near a recent player death receive temporary protection.
-- Dense farms can clean eligible drops more aggressively.
-- Every timer, detection setting, and item category can be changed in-game.
+Configuration is saved between launches. Server owners can tune the rules for their worlds.
 
-## Compatibility
+## Versions
 
 | Minecraft | Fabric | NeoForge |
 | --- | :---: | :---: |
-| 26.1.2 | ✓ | ✓ |
-| 26.2 | ✓ | ✓ |
+| 26.1.2 | Yes | Yes |
+| 26.2 | Yes | Yes |
 
-Fabric requires Fabric API. Mod Menu is recommended for its in-game configuration button.
+The repository keeps shared logic in `common`, with loader integrations in `fabric` and `neoforge`. Fabric requires Fabric API. Mod Menu is recommended for its in-game configuration button.
 
-## Installation
+## Build
 
-1. Install Fabric or NeoForge for a supported Minecraft version.
-2. Download the matching World Cleanup jar from CurseForge or Modrinth.
-3. Place it in the instance or server `mods` folder.
-
-Configuration is stored in the normal Minecraft `config` folder and persists between launches.
-
-## Source layout
-
-The repository keeps one shared codebase:
-
-- `common` — cleanup rules, classification, and tests
-- `fabric` — Fabric integration and configuration screen
-- `neoforge` — NeoForge integration and configuration screen
-
-To build locally, run the Gradle wrapper inside either loader folder. Generated development jars are not official releases.
+Run the Gradle wrapper inside `fabric` or `neoforge`. Generated development JARs appear in that loader's `build/libs` directory and are not distributed through GitHub.
 
 ## License
 
-World Cleanup is distributed under an [All Rights Reserved license](LICENSE). Viewing the source is permitted; copying, redistribution, and derivative works require prior written permission.
+Copyright © 2026 notverycomfy. All Rights Reserved. See [`LICENSE`](LICENSE).
