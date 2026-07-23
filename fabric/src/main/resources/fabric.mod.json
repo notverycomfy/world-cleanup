@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "world_cleanup",
+	"version": "${version}",
+	"name": "World Cleanup",
+	"description": "Intelligent, fair dropped-item cleanup with value, source, death, and farm awareness.",
+	"authors": [
+		"World Cleanup contributors"
+	],
+	"contact": {
+		"homepage": ""
+	},
+	"license": "ARR",
+	"icon": "assets/world_cleanup/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.worldcleanup.fabric.WorldCleanupFabric"
+		],
+		"modmenu": [
+			"dev.worldcleanup.fabric.client.WorldCleanupModMenu"
+		]
+	},
+	"mixins": [
+		"world_cleanup.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": ">=26.1.2 <27",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}
