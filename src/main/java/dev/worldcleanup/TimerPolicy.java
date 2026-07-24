@@ -31,7 +31,20 @@ public final class TimerPolicy {
         boolean nearRecentDeath
     ) {
         public static ItemContext uncategorized() {
-            return new ItemContext(false, false, false, false, false, false);
+            boolean playerThrown = false;
+            boolean mobDrop = false;
+            boolean common = false;
+            boolean denseFarmDrop = false;
+            boolean valuable = false;
+            boolean nearRecentDeath = false;
+            return new ItemContext(
+                playerThrown,
+                mobDrop,
+                common,
+                denseFarmDrop,
+                valuable,
+                nearRecentDeath
+            );
         }
 
         public ItemContext withPlayerThrown() {
