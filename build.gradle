@@ -6,8 +6,8 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
-sourceSets.main.java.srcDir("../common/src/main/java")
-sourceSets.test.java.srcDir("../common/src/test/java")
+
+
 
 base {
 	archivesName = "world-cleanup-fabric-${minecraft_version}"
@@ -78,7 +78,7 @@ jar {
 	def projectName = project.name
 	inputs.property "projectName", projectName
 
-	from("../LICENSE") {
+	from("LICENSE") {
 		rename { "${it}_$projectName"}
 	}
 }
