@@ -90,9 +90,15 @@ public final class WorldCleanup {
             || item.getItem().isDamageableItem();
         boolean deathProtected = nearRecentDeath(level, item);
 
-        return secondsToTicks(TimerPolicy.lifetimeSeconds(
-            config, playerThrown, mobDrop, common, farm, valuable, deathProtected
-        ));
+        TimerPolicy.ItemContext itemContext = new TimerPolicy.ItemContext(
+            playerThrown,
+            mobDrop,
+            common,
+            farm,
+            valuable,
+            deathProtected
+        );
+        return secondsToTicks(TimerPolicy.lifetimeSeconds(config, itemContext));
     }
 
     private static boolean isDenseFarmArea(ServerLevel level, ItemEntity item) {

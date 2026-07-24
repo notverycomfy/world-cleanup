@@ -20,35 +20,55 @@ class TimerPolicyTest {
 
     @Test
     void eachBaseCategoryUsesItsConfiguredTimer() {
-        assertEquals(600, resolve(false, false, false, false, false, false));
-        assertEquals(120, resolve(false, false, true, false, false, false));
-        assertEquals(300, resolve(false, true, false, false, false, false));
-        assertEquals(60, resolve(false, false, false, true, false, false));
-        assertEquals(1200, resolve(false, false, false, false, true, false));
-        assertEquals(900, resolve(false, false, false, false, false, true));
-        assertEquals(180, resolve(true, false, false, false, false, false));
+        TimerPolicy.ItemContext uncategorized = TimerPolicy.ItemContext.uncategorized();
+
+        assertEquals(600, resolve(uncategorized));
+        assertEquals(120, resolve(uncategorized.withCommonCategory()));
+        assertEquals(300, resolve(uncategorized.withMobDrop()));
+        assertEquals(60, resolve(uncategorized.withDenseFarmDrop()));
+        assertEquals(1200, resolve(uncategorized.withValuableCategory()));
+        assertEquals(900, resolve(uncategorized.withRecentDeathProtection()));
+        assertEquals(180, resolve(uncategorized.withPlayerThrown()));
     }
 
     @Test
     void playerThrownSourceIgnoresItemCategories() {
-        assertEquals(180, resolve(true, true, true, true, true, false));
-        assertEquals(900, resolve(true, true, true, true, true, true));
+        TimerPolicy.ItemContext thrownValuableFarmDrop = TimerPolicy.ItemContext.uncategorized()
+            .withPlayerThrown()
+            .withMobDrop()
+            .withCommonCategory()
+            .withDenseFarmDrop()
+            .withValuableCategory();
+
+        assertEquals(180, resolve(thrownValuableFarmDrop));
+        assertEquals(900, resolve(thrownValuableFarmDrop.withRecentDeathProtection()));
     }
 
     @Test
     void protectionsOverrideAggressiveCleanup() {
-        assertEquals(1200, resolve(false, true, true, true, true, false));
-        assertEquals(900, resolve(false, true, true, true, false, true));
-        assertEquals(1200, resolve(false, true, true, true, true, true));
+        TimerPolicy.ItemContext farmMobDrop = TimerPolicy.ItemContext.uncategorized()
+            .withMobDrop()
+            .withCommonCategory()
+            .withDenseFarmDrop();
+
+        assertEquals(1200, resolve(farmMobDrop.withValuableCategory()));
+        assertEquals(900, resolve(farmMobDrop.withRecentDeathProtection()));
+        assertEquals(1200, resolve(
+            farmMobDrop.withValuableCategory().withRecentDeathProtection()
+        ));
     }
 
     @Test
     void sourceAndFarmRulesOverrideOrdinaryCategoryTiming() {
-        assertEquals(300, resolve(false, true, true, false, false, false));
-        assertEquals(60, resolve(false, true, true, true, false, false));
+        TimerPolicy.ItemContext commonMobDrop = TimerPolicy.ItemContext.uncategorized()
+            .withMobDrop()
+            .withCommonCategory();
+
+        assertEquals(300, resolve(commonMobDrop));
+        assertEquals(60, resolve(commonMobDrop.withDenseFarmDrop()));
     }
 
-    private int resolve(boolean player, boolean mob, boolean common, boolean farm, boolean valuable, boolean death) {
-        return TimerPolicy.lifetimeSeconds(config, player, mob, common, farm, valuable, death);
+    private int resolve(TimerPolicy.ItemContext itemContext) {
+        return TimerPolicy.lifetimeSeconds(config, itemContext);
     }
 }

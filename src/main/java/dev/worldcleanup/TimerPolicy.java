@@ -6,6 +6,23 @@ public final class TimerPolicy {
 
     public static int lifetimeSeconds(
         CleanupConfig config,
+        ItemContext item
+    ) {
+        if (item.playerThrown()) {
+            return item.nearRecentDeath()
+                ? Math.max(config.playerThrownSeconds, config.deathProtectionSeconds)
+                : config.playerThrownSeconds;
+        }
+
+        int lifetime = item.common() ? config.commonSeconds : config.defaultSeconds;
+        if (item.mobDrop()) lifetime = config.mobDropSeconds;
+        if (item.denseFarmDrop()) lifetime = Math.min(lifetime, config.farmSeconds);
+        if (item.valuable()) lifetime = Math.max(lifetime, config.valuableSeconds);
+        if (item.nearRecentDeath()) lifetime = Math.max(lifetime, config.deathProtectionSeconds);
+        return lifetime;
+    }
+
+    public record ItemContext(
         boolean playerThrown,
         boolean mobDrop,
         boolean common,
@@ -13,17 +30,32 @@ public final class TimerPolicy {
         boolean valuable,
         boolean nearRecentDeath
     ) {
-        if (playerThrown) {
-            return nearRecentDeath
-                ? Math.max(config.playerThrownSeconds, config.deathProtectionSeconds)
-                : config.playerThrownSeconds;
+        public static ItemContext uncategorized() {
+            return new ItemContext(false, false, false, false, false, false);
         }
 
-        int lifetime = common ? config.commonSeconds : config.defaultSeconds;
-        if (mobDrop) lifetime = config.mobDropSeconds;
-        if (denseFarmDrop) lifetime = Math.min(lifetime, config.farmSeconds);
-        if (valuable) lifetime = Math.max(lifetime, config.valuableSeconds);
-        if (nearRecentDeath) lifetime = Math.max(lifetime, config.deathProtectionSeconds);
-        return lifetime;
+        public ItemContext withPlayerThrown() {
+            return new ItemContext(true, mobDrop, common, denseFarmDrop, valuable, nearRecentDeath);
+        }
+
+        public ItemContext withMobDrop() {
+            return new ItemContext(playerThrown, true, common, denseFarmDrop, valuable, nearRecentDeath);
+        }
+
+        public ItemContext withCommonCategory() {
+            return new ItemContext(playerThrown, mobDrop, true, denseFarmDrop, valuable, nearRecentDeath);
+        }
+
+        public ItemContext withDenseFarmDrop() {
+            return new ItemContext(playerThrown, mobDrop, common, true, valuable, nearRecentDeath);
+        }
+
+        public ItemContext withValuableCategory() {
+            return new ItemContext(playerThrown, mobDrop, common, denseFarmDrop, true, nearRecentDeath);
+        }
+
+        public ItemContext withRecentDeathProtection() {
+            return new ItemContext(playerThrown, mobDrop, common, denseFarmDrop, valuable, true);
+        }
     }
 }
