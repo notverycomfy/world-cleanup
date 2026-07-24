@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="world-cleanup-icon.png" alt="World Cleanup grass block logo" width="160">
+<img src="assets/world-cleanup-icon.png" alt="World Cleanup grass block logo" width="160">
 
 # World Cleanup
 
