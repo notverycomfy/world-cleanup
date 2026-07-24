@@ -90,14 +90,13 @@ public final class WorldCleanup {
             || item.getItem().isDamageableItem();
         boolean deathProtected = nearRecentDeath(level, item);
 
-        TimerPolicy.ItemContext itemContext = new TimerPolicy.ItemContext(
-            playerThrown,
-            mobDrop,
-            common,
-            farm,
-            valuable,
-            deathProtected
-        );
+        TimerPolicy.ItemContext itemContext = TimerPolicy.ItemContext.uncategorized();
+        if (playerThrown) itemContext = itemContext.withPlayerThrown();
+        if (mobDrop) itemContext = itemContext.withMobDrop();
+        if (common) itemContext = itemContext.withCommonCategory();
+        if (farm) itemContext = itemContext.withDenseFarmDrop();
+        if (valuable) itemContext = itemContext.withValuableCategory();
+        if (deathProtected) itemContext = itemContext.withRecentDeathProtection();
         return secondsToTicks(TimerPolicy.lifetimeSeconds(config, itemContext));
     }
 
