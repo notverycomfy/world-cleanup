@@ -30,16 +30,20 @@ Configuration is saved between launches. Server owners can tune the rules for th
 
 ## Versions
 
-| Minecraft | Fabric | NeoForge |
-| --- | :---: | :---: |
-| 26.1.2 | Yes | Yes |
-| 26.2 | Yes | Yes |
+The repository follows the same branch layout as Crop Helper:
 
-The repository keeps shared logic in `common`, with loader integrations in `fabric` and `neoforge`. Fabric requires Fabric API. Mod Menu is recommended for its in-game configuration button.
+| Minecraft | Loader | Branch |
+| --- | --- | --- |
+| 26.1.2 | NeoForge | `main` |
+| 26.1.2 | Fabric | [`codex/fabric-26.1.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/fabric-26.1.2) |
+| 26.2 | Fabric | [`codex/fabric-26.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/fabric-26.2) |
+| 26.2 | NeoForge | [`codex/neoforge-26.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/neoforge-26.2) |
+
+Fabric requires Fabric API. Mod Menu is recommended for its in-game configuration button.
 
 ## Build
 
-Run the Gradle wrapper inside `fabric` or `neoforge`. Generated development JARs appear in that loader's `build/libs` directory and are not distributed through GitHub.
+Use `./gradlew build` from the branch matching the target loader and Minecraft version. Generated development JARs appear in `build/libs` and are not distributed through GitHub.
 
 ## License
 
