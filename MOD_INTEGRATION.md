@@ -1,5 +1,7 @@
 # Mod Integration
 
+**Applies to:** Minecraft 26.2 with Fabric
+
 World Cleanup automatically handles every modded item, even without dedicated integration.
 
 ## Default behavior
