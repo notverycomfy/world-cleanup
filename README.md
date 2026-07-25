@@ -30,14 +30,14 @@ Configuration is saved between launches. Server owners can tune the rules for th
 
 ## Versions
 
-The repository follows the same branch layout as Crop Helper:
+Each supported loader and Minecraft version has its own branch:
 
 | Minecraft | Loader | Branch |
 | --- | --- | --- |
 | 26.1.2 | NeoForge | `main` |
-| 26.1.2 | Fabric | [`codex/fabric-26.1.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/fabric-26.1.2) |
-| 26.2 | Fabric | [`codex/fabric-26.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/fabric-26.2) |
-| 26.2 | NeoForge | [`codex/neoforge-26.2`](https://github.com/notverycomfy/world-cleanup/tree/codex/neoforge-26.2) |
+| 26.1.2 | Fabric | [`fabric-26.1.2`](https://github.com/notverycomfy/world-cleanup/tree/fabric-26.1.2) |
+| 26.2 | Fabric | [`fabric-26.2`](https://github.com/notverycomfy/world-cleanup/tree/fabric-26.2) |
+| 26.2 | NeoForge | [`neoforge-26.2`](https://github.com/notverycomfy/world-cleanup/tree/neoforge-26.2) |
 
 Fabric requires Fabric API. Mod Menu is recommended for its in-game configuration button.
 
